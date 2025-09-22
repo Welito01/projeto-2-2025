@@ -65,16 +65,20 @@ let dias = Math.floor(horas / 24);
 segundos %= 60;
 minutos %= 60;
 horas %= 24;
-return (
-  dias +
-  " dias " +
-  horas +
-  " horas " +
-  minutos +
-  " minutos " +
-  segundos +
-  " segundos"
-);
+if (tempoFinal > 0) {
+  return (
+    dias +
+    " dias " +
+    horas +
+    " horas " +
+    minutos +
+    " minutos " +
+    segundos +
+    " segundos"
+  );
+} else {
+  return "Prazo Finalizado";
+}
 
 const tempoObjetivo2 = new Date("2023-12-05T00:00:00");
 const tempoObjetivo3 = new Date("2023-12-30T00:00:00");
@@ -96,3 +100,19 @@ for (let i = 0; i < contadores.length; i++) {
   //Calcular o tempo usando a função e associá-lo ao objetivo
   contadores[i].textContent = calculaTempo(tempos[i]);
 }
+
+function atualizaCronometro() {
+  for (let i = 0; i < contadores.length; i++) {
+    contadores[i].textContent = calculaTempo(tempos[i]);
+  }
+}
+
+function comecaCronometro() {
+  atualizaCronometro();
+  setInterval(atualizaCronometro, 1000);
+}
+
+comecaCronometro();
+
+//comecaCronometro();
+
